@@ -22,13 +22,6 @@ npm test'''
           }
         }
 
-        stage('package') {
-          steps {
-            sh '''npm run package
-archiveArtifacts \'*/distribution/.zip\''''
-          }
-        }
-
       }
     }
 
