@@ -8,8 +8,27 @@ pipeline {
   }
   stages {
     stage('build') {
-      steps {
-        sh 'npm install'
+      parallel {
+        stage('build') {
+          steps {
+            sh 'npm install'
+          }
+        }
+
+        stage('test') {
+          steps {
+            sh '''npm install
+npm test'''
+          }
+        }
+
+        stage('package') {
+          steps {
+            sh '''npm run package
+archiveArtifacts \'*/distribution/.zip\''''
+          }
+        }
+
       }
     }
 
